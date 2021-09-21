@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Header from './components/shared/Header.component';
 import Login from './components/login/Login.page';
 import Home from './components/home/Home.page';
+import PersonContextProvider from './contexts/Person.context';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -15,21 +16,23 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Login"
-            screenOptions={{
-              headerMode: 'screen',
-              header: (props) => <Header canReturn={false} navigation={props.navigation} />
-            }}
-          >
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Home" 
-                          component={Home} 
-                          options={{ headerMode: 'screen', header: (props) => <Header canReturn={true} navigation={props.navigation} /> }} 
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <PersonContextProvider>
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="Login"
+              screenOptions={{
+                headerMode: 'screen',
+                header: (props) => <Header canReturn={false} navigation={props.navigation} />
+              }}
+            >
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Home"
+                component={Home}
+                options={{ headerMode: 'screen', header: (props) => <Header canReturn={true} navigation={props.navigation} /> }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PersonContextProvider>
       </View>
     </SafeAreaProvider>
   );

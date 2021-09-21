@@ -13,11 +13,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 function Home(props: any) {
   const { navigation } = props;
   return <View style={styles.innerContainer}>
-      <Text>Home...</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text>Go to Login</Text>
-      </TouchableOpacity>
-    </View>;
+    <Text>Home...</Text>
+    <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+      <Text>Go to Login</Text>
+    </TouchableOpacity>
+  </View>;
 }
 
 export default function App() {
@@ -31,11 +31,14 @@ export default function App() {
             initialRouteName="Login"
             screenOptions={{
               headerMode: 'screen',
-              header: (props) => <Header navigation={props.navigation} />
+              header: (props) => <Header canReturn={false} navigation={props.navigation} />
             }}
           >
-            <Stack.Screen name="Login" component={Login} options={{ headerMode: 'screen', header: (props) => <Header canReturn={false} navigation={props.navigation} /> }} />
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Home" 
+                          component={Home} 
+                          options={{ headerMode: 'screen', header: (props) => <Header canReturn={true} navigation={props.navigation} /> }} 
+            />
           </Stack.Navigator>
         </NavigationContainer>
 
@@ -55,6 +58,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: "#fff",
   }
 });

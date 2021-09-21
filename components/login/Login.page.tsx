@@ -1,18 +1,17 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import Footer from '../shared/Footer.component';
+import LoginForm from './Login.form';
 import SubHeader from './Subheader.component';
 
 export default function Login(props: any) {
     return <View style={styles.container}>
-        <SubHeader />
-        <View style={{flex: 1}}>
-            <TouchableOpacity 
-                style={{flex: 1}} 
-                onPress={() => props.navigation.navigate('Home')}>
-                <Text>Go to Home</Text>
-            </TouchableOpacity>
+        <View style={styles.mainContent}>
+            <SubHeader />
+            <LoginForm navigation={props.navigation} />
         </View>
+        <Footer />
     </View>;
 }
 
@@ -20,13 +19,17 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        flex: 1,
         backgroundColor: '#fff',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Dimensions.get('screen').height * 0.05
     },
     mainContent: {
-
+        display: 'flex',
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });

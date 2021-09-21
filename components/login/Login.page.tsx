@@ -4,12 +4,15 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import Footer from '../shared/Footer.component';
 import LoginForm from './Login.form';
 import SubHeader from './Subheader.component';
+import UserContextProvider from '../../contexts/User.context';
 
 export default function Login(props: any) {
     return <View style={styles.container}>
         <View style={styles.mainContent}>
             <SubHeader />
-            <LoginForm navigation={props.navigation} />
+            <UserContextProvider>
+                <LoginForm navigation={props.navigation} />
+            </UserContextProvider>
         </View>
         <Footer />
     </View>;
